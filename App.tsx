@@ -1,19 +1,55 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { AppLoading, Font, Icon } from "expo";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
+interface IProps {}
+interface IState {
+  loadCompleted: boolean;
+}
+export default class App extends React.Component<IProps, IState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loadCompleted: false
+    };
+  }
+
+  public render() {
+    const { loadCompleted } = this.state;
+    if (loadCompleted) {
+      return <View />;
+    } else {
+      return (
+        <AppLoading
+          startAsync={this._loadAssets}
+          onError={this._handleLoadingError}
+          onFinish={this._handleFinishLoading}
+        />
+      );
+    }
+  }
+  public _loadAssets = async () => {
+    return Promise.all([
+      Font.loadAsync({
+        ...Icon.Ionicons.font
+      })
+    ]);
+  };
+
+  public _handleLoadingError = error => {
+    console.warn(error);
+  };
+
+  public _handleFinishLoading = () => {
+    this.setState({ loadCompleted: true });
+  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
