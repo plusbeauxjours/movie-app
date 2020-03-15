@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { AppLoading, Font, Icon } from "expo";
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+import * as Icon from "@expo/vector-icons";
 
 interface IProps {}
 interface IState {
