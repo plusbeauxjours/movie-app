@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import * as Icon from "@expo/vector-icons";
+import MainTabNavigator from "./navigation/MainTabNavigator";
 
 interface IProps {}
 interface IState {
@@ -19,7 +20,7 @@ export default class App extends React.Component<IProps, IState> {
   public render() {
     const { loadCompleted } = this.state;
     if (loadCompleted) {
-      return <View />;
+      return <MainTabNavigator />;
     } else {
       return (
         <AppLoading
