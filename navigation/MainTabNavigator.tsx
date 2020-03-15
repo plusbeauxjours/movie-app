@@ -6,63 +6,73 @@ import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
 import TVScreen from "../screens/TVScreen";
 import TabBarIcon from "../components/TabBarIcon";
+import { BG_COLOR } from "../colors";
 
-const HomeStack = createStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen
-    }
+const StachHeaderStyles = {
+  headerStyle: {
+    backgroundColor: BG_COLOR
   },
-  {
+  headerTitleStyle: {
+    color: "white"
+  }
+};
+
+const HomeStack = createStackNavigator({
+  Home: {
+    screen: HomeScreen,
     navigationOptions: {
-      tabBarLabel: "Home",
-      tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-          focused={focused}
-          name={Platform.OS === "ios" ? `ios-film` : "md-film"}
-        />
-      )
+      title: "Movies",
+      ...StachHeaderStyles
     }
   }
-);
+});
 
-const TVStack = createStackNavigator(
-  {
-    Home: {
-      screen: TVScreen
-    }
-  },
-  {
+HomeStack.navigationOptions = {
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? `ios-film` : "md-film"}
+    />
+  )
+};
+
+const TVStack = createStackNavigator({
+  TV: {
+    screen: TVScreen,
     navigationOptions: {
-      tabBarLabel: "TV",
-      tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-          focused={focused}
-          name={Platform.OS === "ios" ? `ios-tv` : "md-tv"}
-        />
-      )
+      title: "TV",
+      ...StachHeaderStyles
     }
   }
-);
+});
 
-const SearchStack = createStackNavigator(
-  {
-    Home: {
-      screen: SearchScreen
-    }
-  },
-  {
+TVStack.navigationOptions = {
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-tv" : "md-tv"}
+    />
+  )
+};
+
+const SearchStack = createStackNavigator({
+  Search: {
+    screen: SearchScreen,
     navigationOptions: {
-      tabBarLabel: "Search",
-      tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-          focused={focused}
-          name={Platform.OS === "ios" ? `ios-tv` : "md-tv"}
-        />
-      )
+      title: "Search",
+      ...StachHeaderStyles
     }
   }
-);
+});
+
+SearchStack.navigationOptions = {
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? `ios-search` : "md-search"}
+    />
+  )
+};
 
 export default createBottomTabNavigator(
   {
@@ -72,8 +82,9 @@ export default createBottomTabNavigator(
   },
   {
     tabBarOptions: {
+      showLabel: false,
       style: {
-        backgroundColor: "#2c3e50"
+        backgroundColor: BG_COLOR
       },
       activeTintColor: "white",
       inactiveTintColor: "#7f8c8d"

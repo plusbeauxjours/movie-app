@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, StatusBar, Platform } from "react-native";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,7 +20,12 @@ export default class App extends React.Component<IProps, IState> {
   public render() {
     const { loadCompleted } = this.state;
     if (loadCompleted) {
-      return <MainTabNavigator />;
+      return (
+        <React.Fragment>
+          {Platform.OS === "ios" && <StatusBar barStyle={"light-content"} />}
+          <MainTabNavigator />
+        </React.Fragment>
+      );
     } else {
       return (
         <AppLoading
