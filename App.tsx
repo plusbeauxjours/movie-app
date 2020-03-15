@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
-import * as Icon from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import MainTabNavigator from "./navigation/MainTabNavigator";
 
 interface IProps {}
@@ -34,7 +34,7 @@ export default class App extends React.Component<IProps, IState> {
   public _loadAssets = async () => {
     return Promise.all([
       Font.loadAsync({
-        ...Icon.Ionicons.font
+        ...Ionicons.font
       })
     ]);
   };
