@@ -7,6 +7,7 @@ import SearchScreen from "../screens/SearchScreen";
 import TVScreen from "../screens/TVScreen";
 import TabBarIcon from "../components/TabBarIcon";
 import { BG_COLOR } from "../colors";
+import { createAppContainer } from "react-navigation";
 
 const StachHeaderStyles = {
   headerStyle: {
@@ -74,7 +75,7 @@ SearchStack.navigationOptions = {
   )
 };
 
-export default createBottomTabNavigator(
+const TabNavigation = createBottomTabNavigator(
   {
     HomeStack,
     TVStack,
@@ -91,3 +92,10 @@ export default createBottomTabNavigator(
     }
   }
 );
+
+const MainNavigation = createStackNavigator(
+  { TabNavigation },
+  { headerMode: "none" }
+);
+
+export default createAppContainer(MainNavigation);
