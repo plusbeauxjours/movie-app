@@ -1,10 +1,22 @@
+import React, { useState } from "react";
 import { View, Text } from "react-native";
-import React from "react";
+import styled from "styled-components";
+import LoadingContainer from "../components/LoadingContainer";
+
+const Container = styled.View`
+  background-color: black;
+  flex: 1;
+`;
 
 export default () => {
-  return (
-    <View>
-      <Text>Home Screen</Text>
-    </View>
-  );
+  const [loading, setLoading] = useState<boolean>(true);
+  if (loading) {
+    return <LoadingContainer />;
+  } else {
+    return (
+      <Container>
+        <Text>Movies</Text>
+      </Container>
+    );
+  }
 };

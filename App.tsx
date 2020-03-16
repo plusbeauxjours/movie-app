@@ -4,6 +4,7 @@ import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import MainTabNavigator from "./navigation/MainTabNavigator";
+import { BG_COLOR } from "./colors";
 
 interface IProps {}
 interface IState {
@@ -56,7 +57,7 @@ export default class App extends React.Component<IProps, IState> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: BG_COLOR,
     alignItems: "center",
     justifyContent: "center"
   }

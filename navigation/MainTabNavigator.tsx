@@ -11,7 +11,8 @@ import { createAppContainer } from "react-navigation";
 
 const StachHeaderStyles = {
   headerStyle: {
-    backgroundColor: BG_COLOR
+    backgroundColor: BG_COLOR,
+    borderBottomWidth: 0
   },
   headerTitleStyle: {
     color: "white"
