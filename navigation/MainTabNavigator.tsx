@@ -6,7 +6,7 @@ import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
 import TVScreen from "../screens/TVScreen";
 import TabBarIcon from "../components/TabBarIcon";
-import { BG_COLOR } from "../colors";
+import { BG_COLOR, TINT_COLOR, INACTIVE_COLOR } from "../colors";
 import { createAppContainer } from "react-navigation";
 
 const StachHeaderStyles = {
@@ -87,8 +87,8 @@ const TabNavigation = createBottomTabNavigator(
       style: {
         backgroundColor: BG_COLOR
       },
-      activeTintColor: "white",
-      inactiveTintColor: "#7f8c8d"
+      activeTintColor: TINT_COLOR,
+      inactiveTintColor: INACTIVE_COLOR
     }
   }
 );
