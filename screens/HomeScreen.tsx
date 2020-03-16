@@ -39,9 +39,10 @@ const HomeScreen: React.FunctionComponent = () => {
         setNowPlaying(nowPlayingData.data.results);
         setUpcoming(upcomingData.data.results);
         setPopularMovies(popularMoviesData.data.results);
-        setLoading(false);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
     fetchDataAsync();
