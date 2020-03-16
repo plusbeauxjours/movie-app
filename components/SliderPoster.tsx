@@ -3,13 +3,14 @@ import styled from "styled-components/native";
 import { Dimensions } from "react-native";
 import { apiImage } from "../apiCall";
 import { LinearGradient } from "expo-linear-gradient";
+import { GREY_COLOR } from "../colors";
 
 const { width, height } = Dimensions.get("window");
 
 const SLIDE_HEIGHT = height / 3;
 
 const Slide = styled.View`
-  background-color: white;
+  background-color: black;
   flex: 1;
   overflow: hidden;
   height: ${SLIDE_HEIGHT};
@@ -25,11 +26,15 @@ const PosterContent = styled.View`
   padding: 20px;
   position: absolute;
   z-index: 3;
-  bottom: 0;
+  height: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 `;
 
 const Title = styled.Text`
-  font-size: 28px;
+  font-size: 18px;
   color: white;
   font-weight: 600;
   margin-bottom: 10px;
@@ -37,19 +42,65 @@ const Title = styled.Text`
 
 const Subtitle = styled.Text`
   color: white;
-  font-size: 15px;
+  color: ${GREY_COLOR};
+  font-size: 14px;
+  margin-bottom: 10px;
+`;
+
+const Cover = styled.Image`
+  height: 70%;
+  width: 30%;
+`;
+
+const Content = styled.View`
+  width: 80%;
+  margin-left: 50px;
+  flex: 1;
+  align-items: flex-start;
+`;
+
+const Rating = styled.Text`
+  color: white;
+  margin-bottom: 10px;
+  font-size: 12px;
+`;
+
+const Overlay = styled.View`
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: ${SLIDE_HEIGHT};
+  background-color: rgba(0, 0, 0, 0.7);
+`;
+
+const Button = styled.TouchableOpacity`
+  background-color: #e74c3c;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+`;
+
+const ButtonText = styled.Text`
+  color: white;
+  font-size: 12px;
 `;
 
 interface IProps {
   posterUrl: string;
   title: string;
   overview: string;
+  coverUrl: string;
+  rating: string;
 }
 
 const SliderPoster: React.FunctionComponent<IProps> = ({
   posterUrl,
   title,
-  overview = ""
+  overview = "",
+  coverUrl,
+  rating
 }) => {
   return (
     <Slide>
@@ -59,25 +110,25 @@ const SliderPoster: React.FunctionComponent<IProps> = ({
         }}
         resizeMode={"cover"}
       />
-      <LinearGradient
-        colors={["rgba(0, 0, 0, 0.1)", "black"]}
-        start={[0, 0]}
-        end={[0, 0.8]}
-        style={{
-          zIndex: 2,
-          position: "absolute",
-          left: 0,
-          right: 0,
-          top: 0,
-          height: SLIDE_HEIGHT
-        }}
-      />
+      <Overlay />
       <PosterContent>
-        <Title>{title}</Title>
-        <Subtitle>
-          {overview && overview.substring(0, 140)}
-          ...
-        </Subtitle>
+        <Cover
+          source={{
+            uri: apiImage(coverUrl, 500)
+          }}
+          resizeMode={"contain"}
+        />
+        <Content>
+          <Title>{title}</Title>
+          <Rating>⭐️ {rating} / 10</Rating>
+          <Subtitle>
+            {overview && overview.substring(0, 140)}
+            ...
+          </Subtitle>
+          <Button>
+            <ButtonText>View details</ButtonText>
+          </Button>
+        </Content>
       </PosterContent>
     </Slide>
   );

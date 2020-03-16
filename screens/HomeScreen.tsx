@@ -25,7 +25,7 @@ const HomeScreen: React.FunctionComponent = () => {
     async function fetchDataAsync() {
       try {
         const nowPlayingData = await Axios.get(
-          apiCall("movie/now_playing", "language=en-US&page=1&region=kr")
+          apiCall("movie/now_playing", "language=en-US&page=1")
         );
         setNowPlaying(nowPlayingData.data.results);
         const latestMoviesData = await Axios.get(
@@ -50,13 +50,15 @@ const HomeScreen: React.FunctionComponent = () => {
       <Container>
         <Swiper height={SLIDE_HEIGHT} showsPagination={false} autoplay={true}>
           {nowPlaying
-            .filter(movie => movie.backdrop_path)
+            .filter(movie => movie.backdrop_path && movie.poster_path)
             .map(movie => (
               <View style={{ flex: 1 }} key={movie.id}>
                 <SliderPoster
                   posterUrl={movie.backdrop_path}
                   title={movie.original_title}
                   overview={movie.overview}
+                  coverUrl={movie.poster_path}
+                  rating={movie.vote_average}
                 />
               </View>
             ))}
