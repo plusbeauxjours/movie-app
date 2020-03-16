@@ -2,10 +2,9 @@ import React from "react";
 import styled from "styled-components/native";
 import { Dimensions } from "react-native";
 import { apiImage } from "../apiCall";
-import { LinearGradient } from "expo-linear-gradient";
 import { GREY_COLOR } from "../colors";
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("screen");
 
 const SLIDE_HEIGHT = height / 3;
 
@@ -50,6 +49,8 @@ const Subtitle = styled.Text`
 const Cover = styled.Image`
   height: 70%;
   width: 30%;
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 const Content = styled.View`
@@ -79,7 +80,7 @@ const Button = styled.TouchableOpacity`
   background-color: #e74c3c;
   border-radius: 5px;
   overflow: hidden;
-  padding: 5px;
+  padding: 8px;
 `;
 
 const ButtonText = styled.Text`
@@ -101,37 +102,35 @@ const SliderPoster: React.FunctionComponent<IProps> = ({
   overview = "",
   coverUrl,
   rating
-}) => {
-  return (
-    <Slide>
-      <SlidePoster
+}) => (
+  <Slide>
+    <SlidePoster
+      source={{
+        uri: apiImage(posterUrl, 500)
+      }}
+      resizeMode={"cover"}
+    />
+    <Overlay />
+    <PosterContent>
+      <Cover
         source={{
-          uri: apiImage(posterUrl, 500)
+          uri: apiImage(coverUrl, 500)
         }}
-        resizeMode={"cover"}
+        resizeMode={"contain"}
       />
-      <Overlay />
-      <PosterContent>
-        <Cover
-          source={{
-            uri: apiImage(coverUrl, 500)
-          }}
-          resizeMode={"contain"}
-        />
-        <Content>
-          <Title>{title}</Title>
-          <Rating>⭐️ {rating} / 10</Rating>
-          <Subtitle>
-            {overview && overview.substring(0, 140)}
-            ...
-          </Subtitle>
-          <Button>
-            <ButtonText>View details</ButtonText>
-          </Button>
-        </Content>
-      </PosterContent>
-    </Slide>
-  );
-};
+      <Content>
+        <Title>{title}</Title>
+        <Rating>⭐️ {rating} / 10</Rating>
+        <Subtitle>
+          {overview && overview.substring(0, 140)}
+          ...
+        </Subtitle>
+        <Button>
+          <ButtonText>View details</ButtonText>
+        </Button>
+      </Content>
+    </PosterContent>
+  </Slide>
+);
 
 export default SliderPoster;

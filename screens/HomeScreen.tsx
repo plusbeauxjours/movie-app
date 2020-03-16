@@ -6,6 +6,8 @@ import Swiper from "react-native-swiper";
 import LoadingContainer from "../components/LoadingContainer";
 import apiCall from "../apiCall";
 import SliderPoster from "../components/SliderPoster";
+import ScrollingSection from "../components/ScrollingSection";
+import MovieCircle from "../components/MovieCircle";
 
 const { width, height } = Dimensions.get("window");
 
@@ -19,23 +21,24 @@ const Container = styled.ScrollView`
 const HomeScreen: React.FunctionComponent = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [nowPlaying, setNowPlaying] = useState<any>([]);
-  const [latestMovies, setLatestMovies] = useState<any>([]);
+  const [popularMovies, setPopularMovies] = useState<any>([]);
   const [upcoming, setUpcoming] = useState<any>([]);
+
   useEffect(() => {
     async function fetchDataAsync() {
       try {
         const nowPlayingData = await Axios.get(
           apiCall("movie/now_playing", "language=en-US&page=1")
         );
-        setNowPlaying(nowPlayingData.data.results);
-        const latestMoviesData = await Axios.get(
-          apiCall("movie/latest", "language=en-US")
-        );
-        setLatestMovies(latestMoviesData.data.results);
         const upcomingData = await Axios.get(
           apiCall("movie/upcoming", "language=en-US&page=2")
         );
+        const popularMoviesData = await Axios.get(
+          apiCall("movie/popular", "language=en-US&page=1")
+        );
+        setNowPlaying(nowPlayingData.data.results);
         setUpcoming(upcomingData.data.results);
+        setPopularMovies(popularMoviesData.data.results);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -48,7 +51,12 @@ const HomeScreen: React.FunctionComponent = () => {
   } else {
     return (
       <Container>
-        <Swiper height={SLIDE_HEIGHT} showsPagination={false} autoplay={true}>
+        <Swiper
+          height={SLIDE_HEIGHT}
+          showsPagination={false}
+          autoplay={true}
+          autoplayTimeout={3}
+        >
           {nowPlaying
             .filter(movie => movie.backdrop_path && movie.poster_path)
             .map(movie => (
@@ -63,6 +71,19 @@ const HomeScreen: React.FunctionComponent = () => {
               </View>
             ))}
         </Swiper>
+        <ScrollingSection
+          title={"Popular Movies"}
+          items={popularMovies
+            .filter(movie => movie.poster_path)
+            .map(movie => (
+              <MovieCircle
+                key={movie.id}
+                coverUrl={movie.poster_path}
+                rating={movie.vote_average}
+                title={movie.title}
+              />
+            ))}
+        />
       </Container>
     );
   }
