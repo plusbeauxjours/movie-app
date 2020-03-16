@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components/native";
 import { Dimensions } from "react-native";
 import { apiImage } from "../apiCall";
-import { LinearGradient } from "expo";
+import { LinearGradient } from "expo-linear-gradient";
 
 const { width, height } = Dimensions.get("window");
 
 const SLIDE_HEIGHT = height / 3;
 
 const Slide = styled.View`
-  background-color: black;
+  background-color: white;
   flex: 1;
   overflow: hidden;
   height: ${SLIDE_HEIGHT};
@@ -40,35 +40,47 @@ const Subtitle = styled.Text`
   font-size: 15px;
 `;
 
-export default ({ posterUrl, title, overview = "" }) => (
-  <Slide>
-    <SlidePoster
-      source={{
-        uri: apiImage(posterUrl, 500)
-      }}
-      resizeMode={"cover"}
-    />
+interface IProps {
+  posterUrl: string;
+  title: string;
+  overview: string;
+}
 
-    <LinearGradient
-      colors={["rgba(0, 0, 0, 0.1)", "black"]}
-      start={[0, 0]}
-      end={[0, 0.8]}
-      style={{
-        zIndex: 2,
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        height: SLIDE_HEIGHT
-      }}
-    />
+const SliderPoster: React.FunctionComponent<IProps> = ({
+  posterUrl,
+  title,
+  overview = ""
+}) => {
+  return (
+    <Slide>
+      <SlidePoster
+        source={{
+          uri: apiImage(posterUrl, 500)
+        }}
+        resizeMode={"cover"}
+      />
+      <LinearGradient
+        colors={["rgba(0, 0, 0, 0.1)", "black"]}
+        start={[0, 0]}
+        end={[0, 0.8]}
+        style={{
+          zIndex: 2,
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          height: SLIDE_HEIGHT
+        }}
+      />
+      <PosterContent>
+        <Title>{title}</Title>
+        <Subtitle>
+          {overview && overview.substring(0, 140)}
+          ...
+        </Subtitle>
+      </PosterContent>
+    </Slide>
+  );
+};
 
-    <PosterContent>
-      <Title>{title}</Title>
-      <Subtitle>
-        {overview && overview.substring(0, 140)}
-        ...
-      </Subtitle>
-    </PosterContent>
-  </Slide>
-);
+export default SliderPoster;
