@@ -7,7 +7,9 @@ import LoadingContainer from "../components/LoadingContainer";
 import apiCall from "../apiCall";
 import SliderPoster from "../components/SliderPoster";
 import ScrollingSection from "../components/ScrollingSection";
-import MovieCircle from "../components/MovieCircle";
+import Movie from "../components/Movie";
+import SectionTitle from "../components/SectionTitle";
+import MovieDetailed from "../components/MovieDetailed";
 
 const { width, height } = Dimensions.get("window");
 
@@ -15,7 +17,11 @@ const SLIDE_HEIGHT = height / 3;
 
 const Container = styled.ScrollView`
   background-color: black;
-  flex: 1;
+`;
+
+const RowContainer = styled.View`
+  margin-top: 50px;
+  margin-bottom: 50px;
 `;
 
 const HomeScreen: React.FunctionComponent = () => {
@@ -31,7 +37,7 @@ const HomeScreen: React.FunctionComponent = () => {
           apiCall("movie/now_playing", "language=en-US&page=1")
         );
         const upcomingData = await Axios.get(
-          apiCall("movie/upcoming", "language=en-US&page=2")
+          apiCall("movie/upcoming", "page=2")
         );
         const popularMoviesData = await Axios.get(
           apiCall("movie/popular", "language=en-US&page=1")
@@ -77,7 +83,7 @@ const HomeScreen: React.FunctionComponent = () => {
           items={popularMovies
             .filter(movie => movie.poster_path)
             .map(movie => (
-              <MovieCircle
+              <Movie
                 key={movie.id}
                 coverUrl={movie.poster_path}
                 rating={movie.vote_average}
@@ -85,6 +91,20 @@ const HomeScreen: React.FunctionComponent = () => {
               />
             ))}
         />
+        <RowContainer>
+          <SectionTitle title={"Coming Soon"} />
+          {upcoming
+            .filter(movie => movie.poster_path)
+            .map(movie => (
+              <MovieDetailed
+                key={movie.id}
+                coverUrl={movie.poster_path}
+                title={movie.title}
+                releaseDate={movie.release_date}
+                overview={movie.overview}
+              />
+            ))}
+        </RowContainer>
       </Container>
     );
   }

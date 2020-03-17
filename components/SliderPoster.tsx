@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { Dimensions } from "react-native";
 import { apiImage } from "../apiCall";
 import { GREY_COLOR } from "../colors";
+import MovieCover from "./MovieCover";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -112,12 +113,7 @@ const SliderPoster: React.FunctionComponent<IProps> = ({
     />
     <Overlay />
     <PosterContent>
-      <Cover
-        source={{
-          uri: apiImage(coverUrl, 500)
-        }}
-        resizeMode={"contain"}
-      />
+      <MovieCover imageUrl={apiImage(coverUrl, 500)} />
       <Content>
         <Title>{title}</Title>
         <Rating>⭐️ {rating} / 10</Rating>

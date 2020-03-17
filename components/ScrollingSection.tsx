@@ -1,17 +1,11 @@
 import React from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components/native";
+import SectionTitle from "./SectionTitle";
 
 const Container = styled.View`
   margin-top: 50px;
-`;
-
-const Title = styled.Text`
-  padding: 0px 20px;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  margin-top: 40px;
 `;
 
 interface IProps {
@@ -24,7 +18,7 @@ const ScrollingSection: React.FunctionComponent<IProps> = ({
   items
 }) => (
   <Container>
-    <Title>{title}</Title>
+    <SectionTitle title={title} />
     <ScrollView
       horizontal={true}
       showsHorizontalScrollIndicator={false}

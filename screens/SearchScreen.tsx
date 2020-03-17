@@ -1,10 +1,18 @@
-import { View, Text } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components/native";
+import LoadingContainer from "components/LoadingContainer";
 
-export default () => {
-  return (
-    <View>
-      <Text>Search Screen</Text>
-    </View>
-  );
+const Container = styled.View`
+  background-color: black;
+`;
+
+const SearchScreen: React.FunctionComponent = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+  if (loading) {
+    return <LoadingContainer />;
+  } else {
+    return <Container />;
+  }
 };
+
+export default SearchScreen;
