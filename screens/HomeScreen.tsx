@@ -20,8 +20,8 @@ const Container = styled.ScrollView`
 `;
 
 const RowContainer = styled.View`
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
 const HomeScreen: React.FunctionComponent = () => {
@@ -78,19 +78,21 @@ const HomeScreen: React.FunctionComponent = () => {
               </View>
             ))}
         </Swiper>
-        <ScrollingSection
-          title={"Popular Movies"}
-          items={popularMovies
-            .filter(movie => movie.poster_path)
-            .map(movie => (
-              <Movie
-                key={movie.id}
-                coverUrl={movie.poster_path}
-                rating={movie.vote_average}
-                title={movie.title}
-              />
-            ))}
-        />
+        <RowContainer>
+          <ScrollingSection
+            title={"Popular Movies"}
+            items={popularMovies
+              .filter(movie => movie.poster_path)
+              .map(movie => (
+                <Movie
+                  key={movie.id}
+                  coverUrl={movie.poster_path}
+                  rating={movie.vote_average}
+                  title={movie.title}
+                />
+              ))}
+          />
+        </RowContainer>
         <RowContainer>
           <SectionTitle title={"Coming Soon"} />
           {upcoming

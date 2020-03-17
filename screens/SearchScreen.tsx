@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import LoadingContainer from "components/LoadingContainer";
+import LoadingContainer from "../components/LoadingContainer";
 
 const Container = styled.View`
   background-color: black;

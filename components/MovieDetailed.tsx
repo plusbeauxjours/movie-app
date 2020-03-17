@@ -41,14 +41,14 @@ interface IProps {
   coverUrl: string;
   title: string;
   overview: string;
-  releaseDate: string;
+  releaseDate?: string;
 }
 
 const MovieDetailed: React.FunctionComponent<IProps> = ({
   coverUrl,
   title,
   overview,
-  releaseDate
+  releaseDate = ""
 }) => {
   const date = new Date(
     releaseDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3")
@@ -58,10 +58,12 @@ const MovieDetailed: React.FunctionComponent<IProps> = ({
       <MovieCover imageUrl={apiImage(coverUrl)} />
       <Content>
         <Title>{title}</Title>
-        <ReleaseDate>
-          {`${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}
-        `}
-        </ReleaseDate>
+        {releaseDate ? (
+          <ReleaseDate>{`${date.getDate()} ${
+            MONTHS[date.getMonth()]
+          } ${date.getFullYear()}
+        `}</ReleaseDate>
+        ) : null}
         <Overview>
           {overview.length > 90 ? `${overview.substring(0, 89)}...` : overview}
         </Overview>

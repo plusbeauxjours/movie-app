@@ -3,10 +3,7 @@ import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 import SectionTitle from "./SectionTitle";
 
-const Container = styled.View`
-  margin-top: 50px;
-  margin-top: 40px;
-`;
+const Container = styled.View``;
 
 interface IProps {
   title: string;
