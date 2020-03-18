@@ -4,6 +4,12 @@ import { Dimensions } from "react-native";
 import { apiImage } from "../apiCall";
 import { GREY_COLOR } from "../colors";
 import MovieCover from "./MovieCover";
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationState,
+  NavigationParams
+} from "react-navigation";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -90,19 +96,25 @@ const ButtonText = styled.Text`
 `;
 
 interface IProps {
+  id: string;
   posterUrl: string;
   title: string;
   overview: string;
   coverUrl: string;
   rating: string;
+  navigation?: NavigationScreenProp<NavigationState, NavigationParams>;
+  isMovie?: boolean;
 }
 
 const SliderPoster: React.FunctionComponent<IProps> = ({
+  navigation,
   posterUrl,
   title,
   overview = "",
   coverUrl,
-  rating
+  rating,
+  id,
+  isMovie = true
 }) => (
   <Slide>
     <SlidePoster
@@ -121,7 +133,19 @@ const SliderPoster: React.FunctionComponent<IProps> = ({
           {overview && overview.substring(0, 140)}
           ...
         </Subtitle>
-        <Button>
+        <Button
+          onPress={() =>
+            navigation.navigate("Detail", {
+              isMovie,
+              id,
+              title,
+              coverUrl,
+              posterUrl,
+              rating,
+              overview
+            })
+          }
+        >
           <ButtonText>View details</ButtonText>
         </Button>
       </Content>

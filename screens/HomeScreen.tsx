@@ -62,7 +62,7 @@ const HomeScreen: React.FunctionComponent = () => {
           height={SLIDE_HEIGHT}
           showsPagination={false}
           autoplay={true}
-          autoplayTimeout={3}
+          autoplayTimeout={5}
         >
           {nowPlaying
             .filter(movie => movie.backdrop_path && movie.poster_path)
@@ -74,6 +74,7 @@ const HomeScreen: React.FunctionComponent = () => {
                   overview={movie.overview}
                   coverUrl={movie.poster_path}
                   rating={movie.vote_average}
+                  id={movie.id}
                 />
               </View>
             ))}
@@ -89,6 +90,7 @@ const HomeScreen: React.FunctionComponent = () => {
                   coverUrl={movie.poster_path}
                   rating={movie.vote_average}
                   title={movie.title}
+                  id={movie.id}
                 />
               ))}
           />
@@ -104,6 +106,7 @@ const HomeScreen: React.FunctionComponent = () => {
                 title={movie.title}
                 releaseDate={movie.release_date}
                 overview={movie.overview}
+                id={movie.id}
               />
             ))}
         </RowContainer>

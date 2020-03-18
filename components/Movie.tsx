@@ -38,44 +38,42 @@ const Score = styled.Text`
 `;
 
 interface IProps {
+  id: string;
   coverUrl: string;
   title: string;
   rating: string;
   circle?: boolean;
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+  navigation?: NavigationScreenProp<NavigationState, NavigationParams>;
+  isMovie?: boolean;
 }
 
-const Movie: React.FunctionComponent<IProps> = ({
-  navigation,
-  coverUrl,
-  title,
-  rating,
-  circle
-}) => (
-  <Touchable
-    onPress={() =>
-      navigation.navigate("Detail", {
-        title,
-        posterUrl: coverUrl,
-        rating
-      })
-    }
-  >
-    <Container>
-      {circle ? (
-        <CircleImage source={{ uri: apiImage(coverUrl) }} />
-      ) : (
-        <MovieCover imageUrl={apiImage(coverUrl)} />
-      )}
-      <Title>
-        {title.length > 15 ? `${title.substring(0, 15)}...` : title}
-      </Title>
-      <Score>
-        ⭐️ {rating}
-        /10
-      </Score>
-    </Container>
-  </Touchable>
+export default withNavigation<IProps>(
+  ({ id, navigation, coverUrl, title, rating, circle, isMovie = true }) => (
+    <Touchable
+      onPress={() =>
+        navigation.navigate("Detail", {
+          id,
+          isMovie,
+          title,
+          coverUrl,
+          rating
+        })
+      }
+    >
+      <Container>
+        {circle ? (
+          <CircleImage source={{ uri: apiImage(coverUrl) }} />
+        ) : (
+          <MovieCover imageUrl={apiImage(coverUrl)} />
+        )}
+        <Title>
+          {title.length > 15 ? `${title.substring(0, 15)}...` : title}
+        </Title>
+        <Score>
+          ⭐️ {rating}
+          /10
+        </Score>
+      </Container>
+    </Touchable>
+  )
 );
-
-export default withNavigation(Movie);

@@ -1,5 +1,4 @@
-import React from "react";
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
 import MainTabNavigator from "./MainTabNavigator";
 import DetailScreen from "../screens/DetailScreen";
@@ -16,7 +15,6 @@ export default createStackNavigator(
     }
   },
   {
-    mode: "modal",
     navigationOptions: {
       ...HeaderStyles
     }

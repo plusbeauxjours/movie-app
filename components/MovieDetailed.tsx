@@ -45,52 +45,58 @@ const Overview = styled.Text`
 `;
 
 interface IProps {
+  id: string;
   coverUrl: string;
   title: string;
   overview: string;
+  isMovie?: boolean;
   releaseDate?: string;
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+  navigation?: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-const MovieDetailed: React.FunctionComponent<IProps> = ({
-  coverUrl,
-  title,
-  overview,
-  releaseDate = "",
-  navigation
-}) => {
-  const date = new Date(
-    releaseDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3")
-  );
-  return (
-    <TouchableWithoutFeedback
-      onPress={() =>
-        navigation.navigate("Detail", {
-          coverUrl,
-          title,
-          overview
-        })
-      }
-    >
-      <Container>
-        <MovieCover imageUrl={apiImage(coverUrl)} />
-        <Content>
-          <Title>{title}</Title>
-          {releaseDate ? (
-            <ReleaseDate>{`${date.getDate()} ${
-              MONTHS[date.getMonth()]
-            } ${date.getFullYear()}
+export default withNavigation<IProps>(
+  ({
+    id,
+    coverUrl,
+    title,
+    overview,
+    isMovie = true,
+    releaseDate = "",
+    navigation
+  }) => {
+    const date = new Date(
+      releaseDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3")
+    );
+    return (
+      <TouchableWithoutFeedback
+        onPress={() =>
+          navigation.navigate("Detail", {
+            id,
+            isMovie,
+            coverUrl,
+            title,
+            overview
+          })
+        }
+      >
+        <Container>
+          <MovieCover imageUrl={apiImage(coverUrl)} />
+          <Content>
+            <Title>{title}</Title>
+            {releaseDate ? (
+              <ReleaseDate>{`${date.getDate()} ${
+                MONTHS[date.getMonth()]
+              } ${date.getFullYear()}
       `}</ReleaseDate>
-          ) : null}
-          <Overview>
-            {overview.length > 90
-              ? `${overview.substring(0, 89)}...`
-              : overview}
-          </Overview>
-        </Content>
-      </Container>
-    </TouchableWithoutFeedback>
-  );
-};
-
-export default withNavigation(MovieDetailed);
+            ) : null}
+            <Overview>
+              {overview.length > 90
+                ? `${overview.substring(0, 89)}...`
+                : overview}
+            </Overview>
+          </Content>
+        </Container>
+      </TouchableWithoutFeedback>
+    );
+  }
+);
