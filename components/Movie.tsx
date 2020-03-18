@@ -1,5 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationState,
+  NavigationParams
+} from "react-navigation";
 import { apiImage } from "../apiCall";
 import { GREY_COLOR } from "../colors";
 import MovieCover from "./MovieCover";
@@ -36,15 +42,25 @@ interface IProps {
   title: string;
   rating: string;
   circle?: boolean;
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
 const Movie: React.FunctionComponent<IProps> = ({
+  navigation,
   coverUrl,
   title,
   rating,
   circle
 }) => (
-  <Touchable>
+  <Touchable
+    onPress={() =>
+      navigation.navigate("Detail", {
+        title,
+        posterUrl: coverUrl,
+        rating
+      })
+    }
+  >
     <Container>
       {circle ? (
         <CircleImage source={{ uri: apiImage(coverUrl) }} />
@@ -62,4 +78,4 @@ const Movie: React.FunctionComponent<IProps> = ({
   </Touchable>
 );
 
-export default Movie;
+export default withNavigation(Movie);

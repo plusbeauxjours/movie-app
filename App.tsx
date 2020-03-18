@@ -1,10 +1,9 @@
 import React from "react";
-import { StyleSheet, StatusBar, Platform } from "react-native";
+import { StatusBar, Platform } from "react-native";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import MainTabNavigator from "./navigation/MainTabNavigator";
-import { BG_COLOR } from "./colors";
+import AppNavigation from "./navigation/AppNavigation";
 
 interface IProps {}
 interface IState {
@@ -24,7 +23,7 @@ export default class App extends React.Component<IProps, IState> {
       return (
         <React.Fragment>
           {Platform.OS === "ios" && <StatusBar barStyle={"light-content"} />}
-          <MainTabNavigator />
+          <AppNavigation />
         </React.Fragment>
       );
     } else {
@@ -53,12 +52,3 @@ export default class App extends React.Component<IProps, IState> {
     this.setState({ loadCompleted: true });
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: BG_COLOR,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});

@@ -24,7 +24,7 @@ interface IState {
 }
 
 export default class SearchScreen extends React.Component<any, IState> {
-  public static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: (
         <Search

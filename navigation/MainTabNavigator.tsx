@@ -8,23 +8,14 @@ import TVScreen from "../screens/TVScreen";
 import TabBarIcon from "../components/TabBarIcon";
 import { BG_COLOR, TINT_COLOR, INACTIVE_COLOR } from "../colors";
 import { createAppContainer } from "react-navigation";
-
-const StachHeaderStyles = {
-  headerStyle: {
-    backgroundColor: BG_COLOR,
-    borderBottomWidth: 0
-  },
-  headerTitleStyle: {
-    color: "white"
-  }
-};
+import { HeaderStyles } from "../config";
 
 const HomeStack = createStackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
       title: "Movies",
-      ...StachHeaderStyles
+      ...HeaderStyles
     }
   }
 });
@@ -43,7 +34,7 @@ const TVStack = createStackNavigator({
     screen: TVScreen,
     navigationOptions: {
       title: "TV",
-      ...StachHeaderStyles
+      ...HeaderStyles
     }
   }
 });
@@ -62,7 +53,7 @@ const SearchStack = createStackNavigator({
     screen: SearchScreen,
     navigationOptions: {
       title: "Search",
-      ...StachHeaderStyles
+      ...HeaderStyles
     }
   }
 });

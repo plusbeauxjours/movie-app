@@ -1,6 +1,13 @@
 import React from "react";
 import styled from "styled-components/native";
+import { TouchableWithoutFeedback } from "react-native";
 import MovieCover from "./MovieCover";
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationState,
+  NavigationParams
+} from "react-navigation";
 import { apiImage } from "../apiCall";
 import { INACTIVE_COLOR, GREY_COLOR } from "../colors";
 import { MONTHS } from "../config";
@@ -42,34 +49,48 @@ interface IProps {
   title: string;
   overview: string;
   releaseDate?: string;
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
 const MovieDetailed: React.FunctionComponent<IProps> = ({
   coverUrl,
   title,
   overview,
-  releaseDate = ""
+  releaseDate = "",
+  navigation
 }) => {
   const date = new Date(
     releaseDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3")
   );
   return (
-    <Container>
-      <MovieCover imageUrl={apiImage(coverUrl)} />
-      <Content>
-        <Title>{title}</Title>
-        {releaseDate ? (
-          <ReleaseDate>{`${date.getDate()} ${
-            MONTHS[date.getMonth()]
-          } ${date.getFullYear()}
-        `}</ReleaseDate>
-        ) : null}
-        <Overview>
-          {overview.length > 90 ? `${overview.substring(0, 89)}...` : overview}
-        </Overview>
-      </Content>
-    </Container>
+    <TouchableWithoutFeedback
+      onPress={() =>
+        navigation.navigate("Detail", {
+          coverUrl,
+          title,
+          overview
+        })
+      }
+    >
+      <Container>
+        <MovieCover imageUrl={apiImage(coverUrl)} />
+        <Content>
+          <Title>{title}</Title>
+          {releaseDate ? (
+            <ReleaseDate>{`${date.getDate()} ${
+              MONTHS[date.getMonth()]
+            } ${date.getFullYear()}
+      `}</ReleaseDate>
+          ) : null}
+          <Overview>
+            {overview.length > 90
+              ? `${overview.substring(0, 89)}...`
+              : overview}
+          </Overview>
+        </Content>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 
-export default MovieDetailed;
+export default withNavigation(MovieDetailed);
