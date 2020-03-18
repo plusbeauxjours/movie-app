@@ -3,11 +3,10 @@ import { Platform } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import HomeScreen from "../screens/HomeScreen";
-import SearchScreen from "../screens/SearchScreen";
 import TVScreen from "../screens/TVScreen";
+import SearchScreen from "../screens/SearchScreen";
 import TabBarIcon from "../components/TabBarIcon";
 import { BG_COLOR, TINT_COLOR, INACTIVE_COLOR } from "../colors";
-import { createAppContainer } from "react-navigation";
 import { HeaderStyles } from "../config";
 
 const HomeStack = createStackNavigator({
@@ -19,7 +18,6 @@ const HomeStack = createStackNavigator({
     }
   }
 });
-
 HomeStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -38,7 +36,6 @@ const TVStack = createStackNavigator({
     }
   }
 });
-
 TVStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -57,7 +54,6 @@ const SearchStack = createStackNavigator({
     }
   }
 });
-
 SearchStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -90,4 +86,4 @@ const MainNavigation = createStackNavigator(
   { headerMode: "none" }
 );
 
-export default createAppContainer(MainNavigation);
+export default MainNavigation;

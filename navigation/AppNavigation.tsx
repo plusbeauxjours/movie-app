@@ -1,10 +1,10 @@
 import { createStackNavigator } from "react-navigation-stack";
-
 import MainTabNavigator from "./MainTabNavigator";
 import DetailScreen from "../screens/DetailScreen";
 import { HeaderStyles } from "../config";
+import { createAppContainer } from "react-navigation";
 
-export default createStackNavigator(
+const AppNavigation = createStackNavigator(
   {
     Main: {
       screen: MainTabNavigator,
@@ -20,3 +20,5 @@ export default createStackNavigator(
     }
   }
 );
+
+export default createAppContainer(AppNavigation);

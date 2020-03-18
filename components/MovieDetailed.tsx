@@ -10,7 +10,7 @@ import {
 } from "react-navigation";
 import { apiImage } from "../apiCall";
 import { INACTIVE_COLOR, GREY_COLOR } from "../colors";
-import { MONTHS } from "../config";
+import { formatDate } from "../config";
 
 const Container = styled.View`
   padding: 0 20px;
@@ -71,8 +71,8 @@ export default withNavigation<IProps>(
       <TouchableWithoutFeedback
         onPress={() =>
           navigation.navigate("Detail", {
-            id,
             isMovie,
+            id,
             coverUrl,
             title,
             overview
@@ -84,10 +84,7 @@ export default withNavigation<IProps>(
           <Content>
             <Title>{title}</Title>
             {releaseDate ? (
-              <ReleaseDate>{`${date.getDate()} ${
-                MONTHS[date.getMonth()]
-              } ${date.getFullYear()}
-      `}</ReleaseDate>
+              <ReleaseDate>{formatDate(releaseDate)}</ReleaseDate>
             ) : null}
             <Overview>
               {overview.length > 90

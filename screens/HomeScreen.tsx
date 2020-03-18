@@ -37,7 +37,7 @@ const HomeScreen: React.FunctionComponent = () => {
           apiCall("movie/now_playing", "language=en-US&page=1")
         );
         const upcomingData = await Axios.get(
-          apiCall("movie/upcoming", "page=2")
+          apiCall("movie/now_playing", "page=2")
         );
         const popularMoviesData = await Axios.get(
           apiCall("movie/popular", "language=en-US&page=1")
