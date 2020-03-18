@@ -14,7 +14,7 @@ const Container = styled.ScrollView`
 `;
 
 const RowContainer = styled.View`
-  margin-bottom: 50px;
+  margin-top: 40px;
 `;
 
 const TVScreen: React.FunctionComponent = () => {
