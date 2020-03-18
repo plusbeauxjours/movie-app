@@ -106,51 +106,51 @@ interface IProps {
   isMovie?: boolean;
 }
 
-const SliderPoster: React.FunctionComponent<IProps> = ({
-  navigation,
-  posterUrl,
-  title,
-  overview = "",
-  coverUrl,
-  rating,
-  id,
-  isMovie = true
-}) => (
-  <Slide>
-    <SlidePoster
-      source={{
-        uri: apiImage(posterUrl, 500)
-      }}
-      resizeMode={"cover"}
-    />
-    <Overlay />
-    <PosterContent>
-      <MovieCover imageUrl={apiImage(coverUrl, 500)} />
-      <Content>
-        <Title>{title}</Title>
-        <Rating>⭐️ {rating} / 10</Rating>
-        <Subtitle>
-          {overview && overview.substring(0, 140)}
-          ...
-        </Subtitle>
-        <Button
-          onPress={() =>
-            navigation.navigate("Detail", {
-              isMovie,
-              id,
-              title,
-              coverUrl,
-              posterUrl,
-              rating,
-              overview
-            })
-          }
-        >
-          <ButtonText>View details</ButtonText>
-        </Button>
-      </Content>
-    </PosterContent>
-  </Slide>
+export default withNavigation<IProps>(
+  ({
+    navigation,
+    posterUrl,
+    title,
+    overview = "",
+    coverUrl,
+    rating,
+    id,
+    isMovie = true
+  }) => (
+    <Slide>
+      <SlidePoster
+        source={{
+          uri: apiImage(posterUrl, 500)
+        }}
+        resizeMode={"cover"}
+      />
+      <Overlay />
+      <PosterContent>
+        <MovieCover imageUrl={apiImage(coverUrl, 500)} />
+        <Content>
+          <Title>{title}</Title>
+          <Rating>⭐️ {rating} / 10</Rating>
+          <Subtitle>
+            {overview && overview.substring(0, 140)}
+            ...
+          </Subtitle>
+          <Button
+            onPress={() =>
+              navigation.navigate("Detail", {
+                isMovie,
+                id,
+                title,
+                coverUrl,
+                posterUrl,
+                rating,
+                overview
+              })
+            }
+          >
+            <ButtonText>View details</ButtonText>
+          </Button>
+        </Content>
+      </PosterContent>
+    </Slide>
+  )
 );
-
-export default SliderPoster;
