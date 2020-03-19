@@ -7,7 +7,7 @@ import { createAppContainer } from "react-navigation";
 const AppNavigation = createStackNavigator({
   Main: {
     screen: MainTabNavigator,
-    navigationOptions: { header: null }
+    navigationOptions: { headerShown: false }
   },
   Detail: {
     screen: DetailScreen,

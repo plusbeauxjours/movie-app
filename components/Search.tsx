@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions, Platform } from "react-native";
 import styled from "styled-components/native";
-import { GREY_COLOR, INACTIVE_COLOR } from "../colors";
+import { GREY_COLOR } from "../colors";
 
 const { width, height } = Dimensions.get("window");
 
@@ -13,7 +13,9 @@ const Input = styled.TextInput`
   margin-left: ${Platform.OS === "ios" ? 0 : "10px"};
   border-radius: 5px;
   color: white;
-  text-align: center;
+  text-align: ${Platform.OS === "ios" ? "center" : "left"};
+  font-weight: ${Platform.OS === "ios" ? "600" : "800"};
+  font-size: 18px;
 `;
 
 interface IProps {
@@ -30,11 +32,11 @@ const Search: React.FunctionComponent<IProps> = ({
   <Input
     value={value}
     onChangeText={onChange}
-    placeholder="Search here"
+    placeholder="Search..."
     underlineColorAndroid={"black"}
     returnKeyType={"search"}
     onSubmitEditing={onSubmitEditing}
-    placeholderTextColor={"white"}
+    placeholderTextColor={GREY_COLOR}
   />
 );
 
