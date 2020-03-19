@@ -14,6 +14,7 @@ const { width, height } = Dimensions.get("window");
 
 const Container = styled.ScrollView`
   background-color: black;
+  padding-bottom: 50px;
 `;
 
 const Backdrop = styled.Image`
@@ -86,6 +87,11 @@ interface IState {
   spokenLanguages?: Array<any>;
   releaseDate?: Date;
   runtime?: number;
+  status?: string;
+  firstAirDate?: Date;
+  lastEpisode?: Date;
+  episodeNumber?: number;
+  seasonNumber?: number;
 }
 
 export default class DetailScreen extends React.Component<any, IState> {
@@ -133,7 +139,8 @@ export default class DetailScreen extends React.Component<any, IState> {
             poster_path,
             spoken_languages,
             release_date,
-            runtime
+            runtime,
+            status
           }
         } = await Axios.get(
           apiCall(`movie/${id}`, "append_to_response=videos")
@@ -148,16 +155,52 @@ export default class DetailScreen extends React.Component<any, IState> {
           loading: false,
           spokenLanguages: spoken_languages,
           releaseDate: release_date,
-          runtime
+          runtime,
+          status
         });
       } catch (error) {
+        this.setState({ loading: false });
+        console.log(error);
+      }
+    } else {
+      try {
+        const {
+          data: {
+            backdrop_path,
+            genres,
+            original_name,
+            poster_path,
+            overview,
+            vote_average,
+            first_air_date,
+            last_air_date,
+            number_of_episodes,
+            number_of_seasons,
+            status
+          }
+        } = await Axios.get(apiCall(`tv/${id}`, "append_to_response=videos"));
+        this.setState({
+          posterUrl: backdrop_path,
+          coverUrl: poster_path,
+          genres,
+          overview,
+          rating: vote_average,
+          title: original_name,
+          firstAirDate: first_air_date,
+          lastEpisode: last_air_date,
+          episodeNumber: number_of_episodes,
+          seasonNumber: number_of_seasons,
+          status,
+          loading: false
+        });
+      } catch (error) {
+        this.setState({ loading: false });
         console.log(error);
       }
     }
   };
   render() {
     const {
-      id,
       loading,
       coverUrl,
       overview,
@@ -168,7 +211,12 @@ export default class DetailScreen extends React.Component<any, IState> {
       spokenLanguages,
       releaseDate,
       isMovie,
-      runtime
+      runtime,
+      firstAirDate,
+      lastEpisode,
+      episodeNumber,
+      seasonNumber,
+      status
     } = this.state;
     return (
       <Container>
@@ -208,14 +256,14 @@ export default class DetailScreen extends React.Component<any, IState> {
             </CoverContainer>
           </LinearGradient>
         </Cover>
+        {overview ? (
+          <Section>
+            <SectionTitle>Overview</SectionTitle>
+            <Text>{overview}</Text>
+          </Section>
+        ) : null}
         {isMovie ? (
           <React.Fragment>
-            {overview ? (
-              <Section>
-                <SectionTitle>Overview</SectionTitle>
-                <Text>{overview}</Text>
-              </Section>
-            ) : null}
             {spokenLanguages ? (
               <Section>
                 <SectionTitle>Languages</SectionTitle>
@@ -236,9 +284,42 @@ export default class DetailScreen extends React.Component<any, IState> {
                 <Text>{runtime} minutes</Text>
               </Section>
             ) : null}
-            {loading ? <LoadingContainer /> : null}
           </React.Fragment>
+        ) : (
+          <React.Fragment>
+            {firstAirDate ? (
+              <Section>
+                <SectionTitle>First Aired Episode</SectionTitle>
+                <Text>{formatDate(firstAirDate)}</Text>
+              </Section>
+            ) : null}
+            {lastEpisode ? (
+              <Section>
+                <SectionTitle>Latest Aired Episode</SectionTitle>
+                <Text>{formatDate(lastEpisode)}</Text>
+              </Section>
+            ) : null}
+            {episodeNumber ? (
+              <Section>
+                <SectionTitle>Total Episodes</SectionTitle>
+                <Text>{episodeNumber}</Text>
+              </Section>
+            ) : null}
+            {seasonNumber ? (
+              <Section>
+                <SectionTitle>Total Seasons</SectionTitle>
+                <Text>{seasonNumber}</Text>
+              </Section>
+            ) : null}
+          </React.Fragment>
+        )}
+        {status ? (
+          <Section>
+            <SectionTitle>Status</SectionTitle>
+            <Text>{status}</Text>
+          </Section>
         ) : null}
+        {loading ? <LoadingContainer /> : null}
       </Container>
     );
   }
