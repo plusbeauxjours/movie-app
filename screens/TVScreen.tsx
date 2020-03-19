@@ -49,7 +49,7 @@ const TVScreen: React.FunctionComponent = () => {
     return <LoadingContainer />;
   }
   return (
-    <Container>
+    <Container contentContainerStyle={{ paddingBottom: 50 }}>
       <RowContainer>
         <ScrollingSection
           title={"Airing Today"}

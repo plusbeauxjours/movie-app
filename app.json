@@ -1,21 +1,23 @@
 {
   "expo": {
     "name": "movie-app",
+    "githubUrl": "https://github.com/plusbeauxjours/movie-app",
+    "primaryColor": "#000000",
+    "description": "Beautiful App to find Movies and TV Shows",
     "slug": "movie-app",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconCorn.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashOne.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,6 +27,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#000000"
     }
   }
 }

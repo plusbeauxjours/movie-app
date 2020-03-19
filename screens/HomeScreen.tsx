@@ -57,7 +57,7 @@ const HomeScreen: React.FunctionComponent = () => {
     return <LoadingContainer />;
   } else {
     return (
-      <Container>
+      <Container contentContainerStyle={{ paddingBottom: 50 }}>
         <Swiper
           height={SLIDE_HEIGHT}
           showsPagination={false}

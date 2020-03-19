@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { Alert } from "react-native";
+import { Alert, Text } from "react-native";
 import React from "react";
 import styled from "styled-components/native";
 import LoadingContainer from "../components/LoadingContainer";
@@ -26,7 +26,7 @@ interface IState {
 export default class SearchScreen extends React.Component<any, IState> {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: (
+      headerTitle: () => (
         <Search
           value={navigation.getParam("value", "")}
           onChange={navigation.getParam("onChange", null)}
@@ -55,7 +55,7 @@ export default class SearchScreen extends React.Component<any, IState> {
       return <LoadingContainer />;
     } else {
       return (
-        <Container>
+        <Container contentContainerStyle={{ paddingBottom: 50 }}>
           {movieResults.length > 0 ? (
             <RowContainer>
               <ScrollingSection

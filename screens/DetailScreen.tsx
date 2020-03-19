@@ -240,7 +240,7 @@ export default class DetailScreen extends React.Component<any, IState> {
       videos
     } = this.state;
     return (
-      <Container>
+      <Container contentContainerStyle={{ paddingBottom: 50 }}>
         <Backdrop source={{ uri: apiImage(posterUrl, 500) }} />
         <Cover>
           <LinearGradient

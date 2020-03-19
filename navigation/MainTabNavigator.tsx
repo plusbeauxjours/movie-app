@@ -49,7 +49,6 @@ const SearchStack = createStackNavigator({
   Search: {
     screen: SearchScreen,
     navigationOptions: {
-      title: "Search",
       ...HeaderStyles
     }
   }
@@ -62,7 +61,6 @@ SearchStack.navigationOptions = {
     />
   )
 };
-
 const TabNavigation = createBottomTabNavigator(
   {
     HomeStack,
