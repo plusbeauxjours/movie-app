@@ -26,8 +26,11 @@
       "supportsTablet": true,
       "bundleIdentifier": "movie.plusbeauxjours"
     },
+    "android": {
+      "versionCode": 10,
+      "package": "movie.plusbeauxjours"
+    },
     "androidStatusBar": {
-      "versionCode": 1,
       "barStyle": "light-content",
       "backgroundColor": "#000000"
     }
