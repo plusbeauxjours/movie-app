@@ -27,7 +27,7 @@
       "bundleIdentifier": "movie.plusbeauxjours"
     },
     "android": {
-      "versionCode": 10,
+      "versionCode": 11,
       "package": "movie.plusbeauxjours"
     },
     "androidStatusBar": {
