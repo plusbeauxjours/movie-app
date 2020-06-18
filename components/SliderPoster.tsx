@@ -53,13 +53,6 @@ const Subtitle = styled.Text`
   margin-bottom: 10px;
 `;
 
-const Cover = styled.Image`
-  height: 70%;
-  width: 30%;
-  border-radius: 10px;
-  overflow: hidden;
-`;
-
 const Content = styled.View`
   width: 80%;
   margin-left: 50px;
