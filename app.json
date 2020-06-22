@@ -2,7 +2,6 @@
   "expo": {
     "name": "movie-app",
     "githubUrl": "https://github.com/plusbeauxjours/movie-app",
-    "primaryColor": "#000000",
     "description": "Beautiful App to find Movies and TV Shows",
     "slug": "movie-app",
     "privacy": "unlisted",
@@ -13,6 +12,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
+    "primaryColor": "#000000",
     "icon": "./assets/iconCorn.png",
     "splash": {
       "image": "./assets/splashOne.png",
