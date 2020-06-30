@@ -1,16 +1,13 @@
 {
   "expo": {
-    "name": "movie-app",
+    "name": "Popcorn Movie",
     "githubUrl": "https://github.com/plusbeauxjours/movie-app",
     "description": "Beautiful App to find Movies and TV Shows",
     "slug": "movie-app",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "version": "1.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.12",
     "orientation": "portrait",
     "primaryColor": "#000000",
     "icon": "./assets/iconCorn.png",
@@ -22,15 +19,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "movie.plusbeauxjours"
     },
     "android": {
-      "versionCode": 11,
+      "versionCode": 12,
       "package": "movie.plusbeauxjours"
     },
     "androidStatusBar": {
