@@ -5,7 +5,11 @@
     "module": "commonjs",
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
-    "lib": ["es6", "dom", "esnext.asynciterable"],
+    "lib": [
+      "es6",
+      "dom",
+      "esnext.asynciterable"
+    ],
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
@@ -22,5 +26,10 @@
     "noUnusedLocals": true,
     "esModuleInterop": true
   },
-  "exclude": ["node_modules", "build", "scripts"]
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts"
+  ],
+  "extends": "expo/tsconfig.base"
 }
